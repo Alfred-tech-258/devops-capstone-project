@@ -1,4 +1,5 @@
-# DevOps Capstone Template
+# devops-capstone-project
+This repository contains the DevOps capstone project for managing customer accounts and related deployment workflows.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.9](https://img.shields.io/badge/Python-3.9-green.svg)](https://shields.io/)
