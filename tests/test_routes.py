@@ -159,3 +159,23 @@ class TestAccountService(TestCase):
             content_type="application/json"
         )
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_list_all_accounts(self):
+        """It should List all Accounts"""
+        account_list = []
+        for _ in range(5):
+            test_account = AccountFactory()
+            response = self.client.post(
+                BASE_URL,
+                json=test_account.serialize(),
+                content_type="application/json"
+            )
+            self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+            new_account = response.get_json()
+            account_list.append(new_account)
+
+        response = self.client.get(BASE_URL, content_type="application/json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        data = response.get_json()
+        self.assertEqual(len(data), len(account_list))
