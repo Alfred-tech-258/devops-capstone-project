@@ -1,4 +1,5 @@
 # devops-capstone-project
+![Build Status](https://github.com/Alfred-tech-258/devops-capstone-project/actions/workflows/ci-build.yaml/badge.svg)
 This repository contains the DevOps capstone project for managing customer accounts and related deployment workflows.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
