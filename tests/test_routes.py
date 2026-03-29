@@ -18,6 +18,7 @@ DATABASE_URI = os.getenv(
 )
 
 BASE_URL = "/accounts"
+HTTPS_ENVIRON = {"wsgi.url_scheme": "https"}
 
 
 ######################################################################
@@ -251,3 +252,19 @@ class TestAccountService(TestCase):
             content_type="application/json"
         )
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_security_headers(self):
+      """It should return security headers on the home page"""
+      response = self.client.get("/", environ_overrides=HTTPS_ENVIRON)
+  
+      self.assertEqual(response.status_code, status.HTTP_200_OK)
+      self.assertEqual(response.headers["X-Frame-Options"], "SAMEORIGIN")
+      self.assertEqual(response.headers["X-Content-Type-Options"], "nosniff")
+      self.assertEqual(
+          response.headers["Content-Security-Policy"],
+          "default-src 'self'; object-src 'none'"
+      )
+      self.assertEqual(
+          response.headers["Referrer-Policy"],
+          "strict-origin-when-cross-origin"
+      )
