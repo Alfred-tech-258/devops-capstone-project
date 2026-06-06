@@ -154,7 +154,6 @@ class TestAccountService(TestCase):
         self.assertEqual(data["phone_number"], test_account.phone_number)
         self.assertEqual(data["date_joined"], str(test_account.date_joined))
 
-
     def test_account_not_found(self):
         """It should not Read an Account that is not found"""
         response = self.client.get(
@@ -211,7 +210,7 @@ class TestAccountService(TestCase):
         self.assertEqual(data["address"], updated_account.address)
         self.assertEqual(data["phone_number"], updated_account.phone_number)
         self.assertEqual(data["date_joined"], str(updated_account.date_joined))
-    
+
     def test_update_account_not_found(self):
         """It should not Update an Account that is not found"""
         test_account = AccountFactory()
@@ -256,21 +255,21 @@ class TestAccountService(TestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
     def test_security_headers(self):
-      """It should return security headers on the home page"""
-      response = self.client.get("/", environ_overrides=HTTPS_ENVIRON)
-  
-      self.assertEqual(response.status_code, status.HTTP_200_OK)
-      self.assertEqual(response.headers["X-Frame-Options"], "SAMEORIGIN")
-      self.assertEqual(response.headers["X-Content-Type-Options"], "nosniff")
-      self.assertEqual(
-          response.headers["Content-Security-Policy"],
-          "default-src 'self'; object-src 'none'"
-      )
-      self.assertEqual(
-          response.headers["Referrer-Policy"],
-          "strict-origin-when-cross-origin"
-      )
-    
+        """It should return security headers on the home page"""
+        response = self.client.get("/", environ_overrides=HTTPS_ENVIRON)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.headers["X-Frame-Options"], "SAMEORIGIN")
+        self.assertEqual(response.headers["X-Content-Type-Options"], "nosniff")
+        self.assertEqual(
+            response.headers["Content-Security-Policy"],
+            "default-src 'self'; object-src 'none'"
+        )
+        self.assertEqual(
+            response.headers["Referrer-Policy"],
+            "strict-origin-when-cross-origin"
+        )
+
     def test_cors_headers(self):
         """It should return CORS headers on the home page"""
         response = self.client.get("/", environ_overrides=HTTPS_ENVIRON)
