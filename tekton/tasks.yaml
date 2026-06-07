@@ -80,4 +80,4 @@ spec:
         set -e
         python -m pip install --upgrade pip wheel
         pip install -qr requirements.txt
-        nosetests $(params.args) --with-spec --spec-color
+        nosetests $(params.args)
